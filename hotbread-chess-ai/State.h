@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <memory>
 
 template<class DerivedState, class DerivedMove>
 class State

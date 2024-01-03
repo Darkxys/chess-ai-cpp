@@ -12,10 +12,10 @@ class ChessGame : Game<ChessState, ChessMove>
 private:
 	std::map<std::string, unsigned int> stateHistory_;
 public:
-	ChessState nextState(const ChessState s, ChessMove m);
-	std::vector<ChessMove> getLegalMoves(const ChessState s, const Color c);
-	ChessState getStartingState();
-	bool isGameEnded(const ChessState s);
-	float getGameReward(const ChessState s);
+	std::unique_ptr<ChessState> nextState(ChessState s, ChessMove m);
+	std::vector<ChessMove> getLegalMoves(ChessState s);
+	std::unique_ptr<ChessState> getStartingState();
+	bool isGameEnded(ChessState s);
+	float getGameReward(ChessState s);
 };
 

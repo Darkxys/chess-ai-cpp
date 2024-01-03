@@ -1,14 +1,15 @@
 #pragma once
 #include "Move.h"
+#include <cstdint>
 
 class ChessMove : Move<ChessMove>
 {
 private:
 	// Properties
-	__int8 source_;
-	__int8 target_;
-	__int8 piece_;
-	__int8 promotion_;
+	uint8_t source_;
+	uint8_t target_;
+	uint8_t piece_;
+	uint8_t promotion_;
 	bool capture_;
 	bool doublePush_;
 	bool enpassant_;
@@ -20,10 +21,10 @@ public:
 	ChessMove(int source, int target, int piece, int promotion, bool capture = false, bool doublePush = false, bool enpassant = false, bool castling = false);
 
 	// Getters
-	__int8 source();
-	__int8 target();
-	__int8 piece();
-	__int8 promotion();
+	uint8_t source();
+	uint8_t target();
+	uint8_t piece();
+	uint8_t promotion();
 	bool capture();
 	bool doublePush();
 	bool enpassant();

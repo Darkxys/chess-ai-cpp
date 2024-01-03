@@ -12,22 +12,22 @@ ChessMove::ChessMove(int source, int target, int piece, int promotion, bool capt
 	this->castling_ = castling;
 }
 
-__int8 ChessMove::source()
+uint8_t ChessMove::source()
 {
 	return this->source_;
 }
 
-__int8 ChessMove::target()
+uint8_t ChessMove::target()
 {
 	return this->target_;
 }
 
-__int8 ChessMove::piece()
+uint8_t ChessMove::piece()
 {
 	return this->piece_;
 }
 
-__int8 ChessMove::promotion()
+uint8_t ChessMove::promotion()
 {
 	return this->promotion_;
 }

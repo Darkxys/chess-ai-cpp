@@ -17,6 +17,7 @@ public:
 	int countBits();
 	U64 getBoard();
 	int popLsb();
+	int getLsb();
 	int numberLeadingZero();
 
 	void displayBoard();

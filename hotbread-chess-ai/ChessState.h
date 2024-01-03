@@ -10,16 +10,16 @@ struct ChessState : State<ChessState, ChessMove>
 {
 	static const int c_PIECES_AMOUNT = 12;
 
-	ChessState() : ChessState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR") {};
+	ChessState() : ChessState("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -") {};
 	ChessState(std::string fen);
 
 	void displayState();
 	std::string toFEN();
-	Bitboard getOccupancyBoard();
+	U64* getOccupancyBoards();
 
-	Bitboard getBishopAttacks(int square);
-	Bitboard getRookAttacks(int square);
-	Bitboard getQueenAttacks(int square);
+	Bitboard getBishopAttacks(int square, U64 occupancy);
+	Bitboard getRookAttacks(int square, U64 occupancy);
+	Bitboard getQueenAttacks(int square, U64 occupancy);
 	Bitboard getNonSlidingPieceAttacks(Pieces piece, int square);
 
 	std::vector<ChessMove> generateLegalMoves();
@@ -28,10 +28,12 @@ struct ChessState : State<ChessState, ChessMove>
 private:
 	static bool isAttacksInitialized;
 	Bitboard bitboards[c_PIECES_AMOUNT];
-	U64 occupancies_;
+	U64 occupancies_[3];
 	Color side_;		// Current player playing
 	int castle_;		// Castle rights
 	int enpassant_;	// Enpassant square
+
+	// Private constructor from a ChessState
 
 	// Init sliders attack masks
 	static Bitboard s_ROOK_MASKS[64];
@@ -44,10 +46,12 @@ private:
 	void initializeSliderAttacks();
 	void initializeNonSliderAttacks();
 
+	bool isSquareAttacked(int square, Color side);
+
 	Bitboard generateBishopAttackMask(int square);
 	Bitboard generateRookAttackMask(int square);
 
-	U64 generateOccupancyBoard();
+	void generateOccupancyBoards();
 	Bitboard getBishopAttacksSlow(int square, Bitboard blockers);
 	Bitboard getRookAttacksSlow(int square, Bitboard blockers);
 	Bitboard setOccupancy(int index, int bitsInMask, Bitboard attackMask);

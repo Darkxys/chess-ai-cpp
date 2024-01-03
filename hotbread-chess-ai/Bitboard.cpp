@@ -45,6 +45,11 @@ int Bitboard::popLsb()
 	return lsbIndex;
 }
 
+int Bitboard::getLsb()
+{
+	return Bitboard((this->board_ & -static_cast<__int64>(this->board_)) - 1).countBits();
+}
+
 int Bitboard::numberLeadingZero()
 {
 	U64 board = this->board_;
